@@ -14,4 +14,4 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-return 0;
+app.Run();
