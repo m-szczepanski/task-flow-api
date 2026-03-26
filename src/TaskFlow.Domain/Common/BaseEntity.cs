@@ -8,7 +8,7 @@ public abstract class BaseEntity
 
     protected BaseEntity() { }
 
-    public void SetUpdated()
+    protected void SetUpdated()
     {
         UpdatedAt = DateTime.UtcNow;
     }

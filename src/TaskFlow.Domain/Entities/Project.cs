@@ -4,14 +4,18 @@ namespace TaskFlow.Domain.Entities;
 
 public class Project : BaseEntity
 {
-    private Project() { }
+    private Project()
+    {
+        _tasksReadOnly = _tasks.AsReadOnly();
+    }
 
     public string Name { get; private set; } = null!;
     public string? Description { get; private set; }
     public string CreatedBy { get; private set; } = null!;
     
     private readonly List<ProjectTask> _tasks = new();
-    public IReadOnlyCollection<ProjectTask> Tasks => _tasks.AsReadOnly();
+    private readonly IReadOnlyCollection<ProjectTask> _tasksReadOnly;
+    public IReadOnlyCollection<ProjectTask> Tasks => _tasksReadOnly;
     
     public static Project Create(string name, string? description, string createdBy = "system")
     {

@@ -15,7 +15,7 @@ public class ProjectTask : BaseEntity
     public DateTime? DueDate { get; private set; }
     
     public Guid ProjectId { get; private set; }
-    public Project Project { get; private set; } = null!;
+    public Project? Project { get; private set; }
     
     public static ProjectTask Create(
         string title,
