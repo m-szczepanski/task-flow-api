@@ -1,4 +1,4 @@
-namespace DefaultNamespace;
+namespace TaskFlow.Domain.Common;
 
 public abstract class BaseEntity
 {

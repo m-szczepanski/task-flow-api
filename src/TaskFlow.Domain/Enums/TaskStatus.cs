@@ -1,4 +1,4 @@
-namespace DefaultNamespace;
+namespace TaskFlow.Domain.Enums;
 
 public enum TaskStatus
 {
