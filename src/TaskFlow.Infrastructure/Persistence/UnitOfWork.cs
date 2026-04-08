@@ -6,7 +6,6 @@ namespace TaskFlow.Infrastructure.Persistence;
 public class UnitOfWork : IUnitOfWork
 {
     private readonly AppDbContext _context;
-    private bool _disposed = false;
 
     public IProjectRepository Projects { get; }
     public ITaskRepository Tasks { get; }
@@ -20,19 +19,4 @@ public class UnitOfWork : IUnitOfWork
 
     public async Task<int> SaveChangesAsync(CancellationToken ct = default)
         => await _context.SaveChangesAsync(ct);
-
-    public void Dispose()
-    {
-        Dispose(true);
-        GC.SuppressFinalize(this);
-    }
-
-    protected virtual void Dispose(bool disposing)
-    {
-        if (!_disposed && disposing)
-        {
-            _context.Dispose();
-            _disposed = true;
-        }
-    }
 }

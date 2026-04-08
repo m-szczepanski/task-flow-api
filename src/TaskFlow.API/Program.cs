@@ -1,6 +1,4 @@
-using Microsoft.EntityFrameworkCore;
 using TaskFlow.Infrastructure;
-using TaskFlow.Infrastructure.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
 
