@@ -21,7 +21,7 @@ TaskFlow API is a backend system for managing projects and tasks, inspired by si
 | :--- | :--- |
 | Framework | .NET 10, ASP.NET Core Web API |
 | ORM | Entity Framework Core 10 |
-| Database | PostgreSQL (Production) / SQLite (Development) |
+| Database | PostgreSQL |
 | CQRS | MediatR 12 |
 | Validation | FluentValidation |
 | Mapping | Mapster or AutoMapper |
