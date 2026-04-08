@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using TaskFlow.Domain.Entities;
 using TaskFlow.Domain.Enums;
 using TaskFlow.Domain.Interfaces;
+using DomainTaskStatus = TaskFlow.Domain.Enums.TaskStatus;
 
 namespace TaskFlow.Infrastructure.Persistence.Repositories;
 
@@ -16,7 +17,7 @@ public class TaskRepository : ITaskRepository
 
     public async Task<IEnumerable<ProjectTask>> GetByProjectIdAsync(
         Guid projectId,
-        TaskStatus? status = null,
+        DomainTaskStatus? status = null,
         Priority? priority = null,
         CancellationToken ct = default)
     {

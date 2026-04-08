@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using TaskFlow.Domain.Common;
 using TaskFlow.Domain.Entities;
 
 namespace TaskFlow.Infrastructure.Persistence;
@@ -21,8 +22,9 @@ public class AppDbContext : DbContext
         foreach (var entry in ChangeTracker.Entries<BaseEntity>())
         {
             if (entry.State == EntityState.Modified)
-                entry.Entity.SetUpdated();
+                entry.Property(e => e.UpdatedAt).CurrentValue = DateTime.UtcNow;
         }
+
         return base.SaveChangesAsync(ct);
     }
 }
