@@ -1,5 +1,6 @@
 using FluentValidation;
 using MediatR;
+using ApplicationValidationException = TaskFlow.Application.Common.Exceptions.ValidationException;
 
 namespace TaskFlow.Application.Common.Behaviors;
 
@@ -31,7 +32,7 @@ public class ValidationBehavior<TRequest, TResponse>
             .ToList();
 
         if (failures.Count > 0)
-            throw new Exceptions.ValidationException(failures);
+            throw new ApplicationValidationException(failures);
 
         return await next();
     }
