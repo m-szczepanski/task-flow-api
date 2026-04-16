@@ -15,14 +15,14 @@ public class ProjectRepository : IProjectRepository
 
     public async Task<Project?> GetByIdAsync(Guid id, CancellationToken ct = default)
         => await _context.Projects
-            .FirstOrDefaultAsync(p => p.Id == id, ct);
+            .FirstOrDefaultAsync(project => project.Id == id, ct);
 
     public async Task<(Project Project, int TaskCount)?> GetByIdWithTaskCountAsync(Guid id, CancellationToken ct = default)
     {
         var result = await _context.Projects
             .AsNoTracking()
-            .Where(p => p.Id == id)
-            .Select(p => new { Project = p, TaskCount = p.Tasks.Count })
+            .Where(project => project.Id == id)
+            .Select(project => new { Project = project, TaskCount = project.Tasks.Count })
             .FirstOrDefaultAsync(ct);
 
         return result is null ? null : (result.Project, result.TaskCount);
@@ -37,10 +37,10 @@ public class ProjectRepository : IProjectRepository
     {
         var results = await _context.Projects
             .AsNoTracking()
-            .Select(p => new { Project = p, TaskCount = p.Tasks.Count })
+            .Select(project => new { Project = project, TaskCount = project.Tasks.Count })
             .ToListAsync(ct);
 
-        return results.Select(r => (r.Project, r.TaskCount));
+        return results.Select(projectWithCount => (projectWithCount.Project, projectWithCount.TaskCount));
     }
 
     public async Task AddAsync(Project project, CancellationToken ct = default)

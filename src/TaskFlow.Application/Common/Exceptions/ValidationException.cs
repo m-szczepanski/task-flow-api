@@ -14,8 +14,8 @@ public sealed class ValidationException : Exception
         : this()
     {
         Errors = failures
-            .GroupBy(f => f.PropertyName, f => f.ErrorMessage)
-            .ToDictionary(g => g.Key, g => g.Distinct().ToArray());
+            .GroupBy(failure => failure.PropertyName, failure => failure.ErrorMessage)
+            .ToDictionary(group => group.Key, group => group.Distinct().ToArray());
     }
 
     public IReadOnlyDictionary<string, string[]> Errors { get; }

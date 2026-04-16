@@ -23,11 +23,11 @@ public class ValidationBehavior<TRequest, TResponse>
         var context = new ValidationContext<TRequest>(request);
 
         var validationResults = await Task.WhenAll(
-            _validators.Select(v => v.ValidateAsync(context, ct)));
+            _validators.Select(validator => validator.ValidateAsync(context, ct)));
 
         var failures = validationResults
-            .SelectMany(r => r.Errors)
-            .Where(e => e is not null)
+            .SelectMany(validationResult => validationResult.Errors)
+            .Where(error => error is not null)
             .ToList();
 
         if (failures.Count > 0)

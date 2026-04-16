@@ -17,14 +17,14 @@ public class GetAllProjectsHandler
     {
         var projects = await _uow.Projects.GetAllWithTaskCountsAsync(ct);
 
-        return projects.Select(p => new ProjectDto(
-            p.Project.Id,
-            p.Project.Name,
-            p.Project.Description,
-            p.Project.CreatedBy,
-            p.Project.CreatedAt,
-            p.Project.UpdatedAt,
-            p.TaskCount
+        return projects.Select(projectWithCount => new ProjectDto(
+            projectWithCount.Project.Id,
+            projectWithCount.Project.Name,
+            projectWithCount.Project.Description,
+            projectWithCount.Project.CreatedBy,
+            projectWithCount.Project.CreatedAt,
+            projectWithCount.Project.UpdatedAt,
+            projectWithCount.TaskCount
         ));
     }
 }
