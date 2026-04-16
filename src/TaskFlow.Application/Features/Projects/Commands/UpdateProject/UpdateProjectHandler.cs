@@ -1,5 +1,6 @@
 using MediatR;
 using TaskFlow.Application.Common.Exceptions;
+using TaskFlow.Domain.Entities;
 using TaskFlow.Domain.Interfaces;
 
 namespace TaskFlow.Application.Features.Projects.Commands.UpdateProject;
@@ -12,7 +13,7 @@ public class UpdateProjectHandler : IRequestHandler<UpdateProjectCommand>
     public async Task Handle(UpdateProjectCommand request, CancellationToken ct)
     {
         var project = await _uow.Projects.GetByIdAsync(request.Id, ct)
-                      ?? throw new NotFoundException(nameof(Projects), request.Id);
+                      ?? throw new NotFoundException(nameof(Project), request.Id);
 
         project.Update(request.Name, request.Description);
         _uow.Projects.Update(project);
