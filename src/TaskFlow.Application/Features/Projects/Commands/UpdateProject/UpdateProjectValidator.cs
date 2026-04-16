@@ -11,5 +11,8 @@ public class UpdateProjectValidator : AbstractValidator<UpdateProjectCommand>
             .NotEmpty().WithMessage("Project name is required.")
             .MinimumLength(3)
             .MaximumLength(100);
+
+        RuleFor(x => x.Description)
+            .MaximumLength(500);
     }
 }

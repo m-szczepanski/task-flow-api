@@ -13,17 +13,17 @@ public class GetProjectByIdHandler : IRequestHandler<GetProjectByIdQuery, Projec
 
     public async Task<ProjectDto> Handle(GetProjectByIdQuery request, CancellationToken ct)
     {
-        var project = await _uow.Projects.GetByIdAsync(request.Id, ct)
+        var project = await _uow.Projects.GetByIdWithTaskCountAsync(request.Id, ct)
                       ?? throw new NotFoundException(nameof(Project), request.Id);
 
         return new ProjectDto(
-            project.Id,
-            project.Name,
-            project.Description,
-            project.CreatedBy,
-            project.CreatedAt,
-            project.UpdatedAt,
-            project.Tasks.Count
+            project.Project.Id,
+            project.Project.Name,
+            project.Project.Description,
+            project.Project.CreatedBy,
+            project.Project.CreatedAt,
+            project.Project.UpdatedAt,
+            project.TaskCount
         );
     }
 }

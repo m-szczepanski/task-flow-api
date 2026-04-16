@@ -15,16 +15,16 @@ public class GetAllProjectsHandler
         GetAllProjectsQuery request,
         CancellationToken ct)
     {
-        var projects = await _uow.Projects.GetAllAsync(ct);
+        var projects = await _uow.Projects.GetAllWithTaskCountsAsync(ct);
 
         return projects.Select(p => new ProjectDto(
-            p.Id,
-            p.Name,
-            p.Description,
-            p.CreatedBy,
-            p.CreatedAt,
-            p.UpdatedAt,
-            p.Tasks.Count
+            p.Project.Id,
+            p.Project.Name,
+            p.Project.Description,
+            p.Project.CreatedBy,
+            p.Project.CreatedAt,
+            p.Project.UpdatedAt,
+            p.TaskCount
         ));
     }
 }

@@ -16,7 +16,6 @@ public class UpdateProjectHandler : IRequestHandler<UpdateProjectCommand>
                       ?? throw new NotFoundException(nameof(Project), request.Id);
 
         project.Update(request.Name, request.Description);
-        _uow.Projects.Update(project);
         await _uow.SaveChangesAsync(ct);
     }
 }

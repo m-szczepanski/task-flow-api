@@ -22,8 +22,10 @@ public class ValidationBehavior<TRequest, TResponse>
 
         var context = new ValidationContext<TRequest>(request);
 
-        var failures = _validators
-            .Select(v => v.Validate(context))
+        var validationResults = await Task.WhenAll(
+            _validators.Select(v => v.ValidateAsync(context, ct)));
+
+        var failures = validationResults
             .SelectMany(r => r.Errors)
             .Where(e => e is not null)
             .ToList();
